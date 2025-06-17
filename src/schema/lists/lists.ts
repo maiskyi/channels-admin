@@ -1,4 +1,5 @@
 import { User } from "./User";
+import { TelegramUser } from "./TelegramUser";
 // import { Feedback } from "./Feedback";
 // import { Story } from "./Story";
 // import { Inquiry } from "./Inquiry";
@@ -11,6 +12,7 @@ import { User } from "./User";
 
 export const lists = {
   User,
+  TelegramUser,
   // Feedback,
   // Story,
   // Inquiry,
