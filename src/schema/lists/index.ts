@@ -1,1 +1,1 @@
-export {lists} from './lists'
+export { lists } from "./lists";

@@ -54,7 +54,13 @@ input StringFilter {
   contains: String
   startsWith: String
   endsWith: String
+  mode: QueryMode
   not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
 }
 
 input NestedStringFilter {
@@ -121,6 +127,73 @@ input UserCreateInput {
   createdAt: DateTime
 }
 
+type TelegramUser {
+  id: ID!
+  telegramId: Int
+  firstName: String
+  lastName: String
+  language: String
+  createdAt: DateTime
+}
+
+input TelegramUserWhereUniqueInput {
+  id: ID
+  telegramId: Int
+}
+
+input TelegramUserWhereInput {
+  AND: [TelegramUserWhereInput!]
+  OR: [TelegramUserWhereInput!]
+  NOT: [TelegramUserWhereInput!]
+  id: IDFilter
+  telegramId: IntFilter
+  firstName: StringFilter
+  lastName: StringFilter
+  language: StringFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntFilter
+}
+
+input TelegramUserOrderByInput {
+  id: OrderDirection
+  telegramId: OrderDirection
+  firstName: OrderDirection
+  lastName: OrderDirection
+  language: OrderDirection
+  createdAt: OrderDirection
+}
+
+input TelegramUserUpdateInput {
+  telegramId: Int
+  firstName: String
+  lastName: String
+  language: String
+  createdAt: DateTime
+}
+
+input TelegramUserUpdateArgs {
+  where: TelegramUserWhereUniqueInput!
+  data: TelegramUserUpdateInput!
+}
+
+input TelegramUserCreateInput {
+  telegramId: Int
+  firstName: String
+  lastName: String
+  language: String
+  createdAt: DateTime
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -133,6 +206,12 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
+  createTelegramUser(data: TelegramUserCreateInput!): TelegramUser
+  createTelegramUsers(data: [TelegramUserCreateInput!]!): [TelegramUser]
+  updateTelegramUser(where: TelegramUserWhereUniqueInput!, data: TelegramUserUpdateInput!): TelegramUser
+  updateTelegramUsers(data: [TelegramUserUpdateArgs!]!): [TelegramUser]
+  deleteTelegramUser(where: TelegramUserWhereUniqueInput!): TelegramUser
+  deleteTelegramUsers(where: [TelegramUserWhereUniqueInput!]!): [TelegramUser]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -159,6 +238,9 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   usersCount(where: UserWhereInput! = {}): Int
+  telegramUser(where: TelegramUserWhereUniqueInput!): TelegramUser
+  telegramUsers(where: TelegramUserWhereInput! = {}, orderBy: [TelegramUserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TelegramUserWhereUniqueInput): [TelegramUser!]
+  telegramUsersCount(where: TelegramUserWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
@@ -251,11 +333,6 @@ enum KeystoneAdminUIFieldMetaItemViewFieldMode {
 enum KeystoneAdminUIFieldMetaItemViewFieldPosition {
   form
   sidebar
-}
-
-enum QueryMode {
-  default
-  insensitive
 }
 
 type KeystoneAdminUIFieldGroupMeta {
