@@ -7,7 +7,7 @@
     "start": "keystone start",
     "build": "keystone build",
     "docker": "docker-compose up -d",
-    "lint": "eslint src --max-warnings=0"
+    "lint": "eslint src --max-warnings=0 --fix"
   },
   "dependencies": {
     "@keystone-6/auth": "^8.0.0",
