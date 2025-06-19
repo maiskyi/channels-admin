@@ -5,7 +5,7 @@ import { text, password, timestamp, checkbox } from "@keystone-6/core/fields";
 import { allowAll } from "@keystone-6/core/access";
 import { Session } from "../lists.types";
 
-export const Admin = list<Lists.User.TypeInfo<Session>>({
+export const Admin = list<Lists.Admin.TypeInfo<Session>>({
   access: allowAll,
   ui: {
     isHidden: ({ session }) => {

@@ -5,7 +5,7 @@ import { integer, text, timestamp } from "@keystone-6/core/fields";
 import { allowAll } from "@keystone-6/core/access";
 import { Session } from "../lists.types";
 
-export const User = list<Lists.TelegramUser.TypeInfo<Session>>({
+export const User = list<Lists.User.TypeInfo<Session>>({
   access: allowAll,
   ui: {
     labelField: "firstName",

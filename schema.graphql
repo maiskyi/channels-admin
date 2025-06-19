@@ -246,6 +246,71 @@ input ChannelCreateInput {
   createdAt: DateTime
 }
 
+type Subscription {
+  id: ID!
+  user: User
+  channel: Channel
+  createdAt: DateTime
+}
+
+input SubscriptionWhereUniqueInput {
+  id: ID
+}
+
+input SubscriptionWhereInput {
+  AND: [SubscriptionWhereInput!]
+  OR: [SubscriptionWhereInput!]
+  NOT: [SubscriptionWhereInput!]
+  id: IDFilter
+  user: UserWhereInput
+  channel: ChannelWhereInput
+  createdAt: DateTimeNullableFilter
+}
+
+input SubscriptionOrderByInput {
+  id: OrderDirection
+  createdAt: OrderDirection
+}
+
+input SubscriptionUpdateInput {
+  user: UserRelateToOneForUpdateInput
+  channel: ChannelRelateToOneForUpdateInput
+  createdAt: DateTime
+}
+
+input UserRelateToOneForUpdateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+}
+
+input ChannelRelateToOneForUpdateInput {
+  create: ChannelCreateInput
+  connect: ChannelWhereUniqueInput
+  disconnect: Boolean
+}
+
+input SubscriptionUpdateArgs {
+  where: SubscriptionWhereUniqueInput!
+  data: SubscriptionUpdateInput!
+}
+
+input SubscriptionCreateInput {
+  user: UserRelateToOneForCreateInput
+  channel: ChannelRelateToOneForCreateInput
+  createdAt: DateTime
+}
+
+input UserRelateToOneForCreateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input ChannelRelateToOneForCreateInput {
+  create: ChannelCreateInput
+  connect: ChannelWhereUniqueInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -270,6 +335,12 @@ type Mutation {
   updateChannels(data: [ChannelUpdateArgs!]!): [Channel]
   deleteChannel(where: ChannelWhereUniqueInput!): Channel
   deleteChannels(where: [ChannelWhereUniqueInput!]!): [Channel]
+  createSubscription(data: SubscriptionCreateInput!): Subscription
+  createSubscriptions(data: [SubscriptionCreateInput!]!): [Subscription]
+  updateSubscription(where: SubscriptionWhereUniqueInput!, data: SubscriptionUpdateInput!): Subscription
+  updateSubscriptions(data: [SubscriptionUpdateArgs!]!): [Subscription]
+  deleteSubscription(where: SubscriptionWhereUniqueInput!): Subscription
+  deleteSubscriptions(where: [SubscriptionWhereUniqueInput!]!): [Subscription]
   endSession: Boolean!
   authenticateAdminWithPassword(email: String!, password: String!): AdminAuthenticationWithPasswordResult
   createInitialAdmin(data: CreateInitialAdminInput!): AdminAuthenticationWithPasswordSuccess!
@@ -302,6 +373,9 @@ type Query {
   channel(where: ChannelWhereUniqueInput!): Channel
   channels(where: ChannelWhereInput! = {}, orderBy: [ChannelOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ChannelWhereUniqueInput): [Channel!]
   channelsCount(where: ChannelWhereInput! = {}): Int
+  subscription(where: SubscriptionWhereUniqueInput!): Subscription
+  subscriptions(where: SubscriptionWhereInput! = {}, orderBy: [SubscriptionOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: SubscriptionWhereUniqueInput): [Subscription!]
+  subscriptionsCount(where: SubscriptionWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
