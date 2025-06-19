@@ -1,13 +1,15 @@
 {
-  "name": "keystone-app",
+  "name": "channels-admin",
   "version": "1.0.3",
   "private": true,
   "scripts": {
     "dev": "env-cmd keystone dev",
-    "start": "keystone start",
+    "start": "keystone start --with-migrations",
     "build": "keystone build",
     "docker": "docker-compose up -d",
-    "lint": "eslint src --max-warnings=0 --fix"
+    "lint": "eslint src --max-warnings=0 --fix",
+    "migrate": "env-cmd keystone prisma migrate dev",
+    "act": "act -j deploy --secret-file .deploy --env-file .deploy --var-file .deploy --container-architecture linux/amd64"
   },
   "dependencies": {
     "@keystone-6/auth": "^8.0.0",

@@ -1,0 +1,17 @@
+runtime: nodejs20
+service: admin-dev
+instance_class: F1
+
+beta_settings:
+  cloud_sql_instances: channels-feed:us-east1:channels
+
+liveness_check:
+  path: /api/health-check
+  check_interval_sec: 5
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+  initial_delay_sec: 10
+
+automatic_scaling:
+  max_instances: 1
