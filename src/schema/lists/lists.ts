@@ -1,25 +1,9 @@
+import { Admin } from "./Admin";
 import { User } from "./User";
-import { TelegramUser } from "./TelegramUser";
-// import { Feedback } from "./Feedback";
-// import { Story } from "./Story";
-// import { Inquiry } from "./Inquiry";
-// import { Character } from "./Character";
-// import { MoralLesson } from "./MoralLesson";
-// import { PlaceOfEvent } from "./PlaceOfEvent";
-// import { Prompt } from "./Prompt";
-// import { Config } from "./Config";
-// import { Lullaby } from "./Lullaby";
+import { Channel } from "./Channel";
 
 export const lists = {
+  Admin,
   User,
-  TelegramUser,
-  // Feedback,
-  // Story,
-  // Inquiry,
-  // Character,
-  // MoralLesson,
-  // PlaceOfEvent,
-  // Prompt,
-  // Lullaby,
-  // Config,
+  Channel,
 };

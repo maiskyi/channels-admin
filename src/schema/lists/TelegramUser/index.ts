@@ -1,1 +1,0 @@
-export { TelegramUser } from "./TelegramUser";
