@@ -1,9 +1,9 @@
 runtime: nodejs20
-service: ks-dev
+service: admin-dev
 instance_class: F1
 
 beta_settings:
-  cloud_sql_instances: fabled-976c8:us-east1:production
+  cloud_sql_instances: channels-feed:us-east1:channels
 
 liveness_check:
   path: /api/health-check
