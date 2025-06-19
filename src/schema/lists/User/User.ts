@@ -1,29 +1,69 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Lists } from ".keystone/types";
 import { list } from "@keystone-6/core";
-import { text, password, timestamp, checkbox } from "@keystone-6/core/fields";
+import { integer, text, timestamp } from "@keystone-6/core/fields";
 import { allowAll } from "@keystone-6/core/access";
 import { Session } from "../lists.types";
 
 export const User = list<Lists.User.TypeInfo<Session>>({
   access: allowAll,
   ui: {
-    isHidden: ({ session }) => {
-      return !session?.data?.isAdmin;
+    labelField: "firstName",
+    listView: {
+      initialColumns: ["firstName", "lastName", "tid"],
     },
   },
   fields: {
-    name: text({ validation: { isRequired: true } }),
-    email: text({
-      validation: { isRequired: true },
+    tid: integer({
+      validation: {
+        isRequired: true,
+      },
       isIndexed: "unique",
+      ui: {
+        itemView: {
+          fieldMode: "read",
+        },
+      },
     }),
-    password: password({ validation: { isRequired: true } }),
-    isAdmin: checkbox({
-      defaultValue: true,
+    firstName: text({
+      validation: {
+        isRequired: true,
+      },
+      ui: {
+        itemView: {
+          fieldMode: "read",
+        },
+      },
+    }),
+    lastName: text({
+      validation: {
+        isRequired: true,
+      },
+      ui: {
+        itemView: {
+          fieldMode: "read",
+        },
+      },
+    }),
+    language: text({
+      validation: {
+        isRequired: true,
+      },
+      ui: {
+        itemView: {
+          fieldMode: "read",
+        },
+      },
     }),
     createdAt: timestamp({
-      defaultValue: { kind: "now" },
+      defaultValue: {
+        kind: "now",
+      },
+      ui: {
+        itemView: {
+          fieldMode: "read",
+        },
+      },
     }),
   },
 });

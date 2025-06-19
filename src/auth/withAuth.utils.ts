@@ -1,7 +1,7 @@
 import { createAuth } from "@keystone-6/auth";
 
 const { withAuth } = createAuth({
-  listKey: "User",
+  listKey: "Admin",
   identityField: "email",
   sessionData: "name email isAdmin",
   secretField: "password",

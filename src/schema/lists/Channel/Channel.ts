@@ -5,16 +5,16 @@ import { integer, text, timestamp } from "@keystone-6/core/fields";
 import { allowAll } from "@keystone-6/core/access";
 import { Session } from "../lists.types";
 
-export const TelegramUser = list<Lists.TelegramUser.TypeInfo<Session>>({
+export const Channel = list<Lists.Channel.TypeInfo<Session>>({
   access: allowAll,
   ui: {
-    labelField: "firstName",
+    labelField: "title",
     listView: {
-      initialColumns: ["firstName", "lastName", "telegramId"],
+      initialColumns: ["title", "tid"],
     },
   },
   fields: {
-    telegramId: integer({
+    tid: integer({
       validation: {
         isRequired: true,
       },
@@ -25,27 +25,18 @@ export const TelegramUser = list<Lists.TelegramUser.TypeInfo<Session>>({
         },
       },
     }),
-    firstName: text({
+    username: text({
       validation: {
         isRequired: true,
       },
+      isIndexed: "unique",
       ui: {
         itemView: {
           fieldMode: "read",
         },
       },
     }),
-    lastName: text({
-      validation: {
-        isRequired: true,
-      },
-      ui: {
-        itemView: {
-          fieldMode: "read",
-        },
-      },
-    }),
-    language: text({
+    title: text({
       validation: {
         isRequired: true,
       },
