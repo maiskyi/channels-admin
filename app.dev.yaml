@@ -3,7 +3,7 @@ service: admin-dev
 instance_class: F1
 
 beta_settings:
-  cloud_sql_instances: channels-feed:us-east1:channels
+  cloud_sql_instances: channels-feed:us-central1:channels
 
 liveness_check:
   path: /api/health-check
